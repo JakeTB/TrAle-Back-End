@@ -1,7 +1,7 @@
-const { getAllUsers } = require("../models/usersModels");
-exports.sendAllUsers = (req, res, next) => {
+const { getAllTrails } = require("../models/trailsModels");
+exports.sendAllTrails = (req, res, next) => {
   console.log("Inside of model");
-  getAllUsers()
+  getAllTrails()
     .then(response => {
       console.log("Response", response);
       res.status(200).send({ response });

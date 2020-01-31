@@ -20,6 +20,14 @@ describe("API-Testing", () => {
           .get("/api/users")
           .expect(200);
       });
+      it("The returned object should have the right objects", () => {
+        return request(app)
+          .get("/api/users")
+          .expect(200)
+          .then(({ body }) => {
+            console.log(body);
+          });
+      });
     });
   });
 });

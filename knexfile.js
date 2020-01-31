@@ -1,5 +1,6 @@
 const { DB_URL } = process.env;
-
+const pg = require("pg");
+pg.defaults.ssl = true;
 const ENV = process.env.NODE_ENV || "development";
 
 const baseConfig = {
@@ -20,7 +21,8 @@ const customConfig = {
       password:
         "c36bf15735ecb0e9aef50dea46cd4696593867b24705da5ddb9df96c137029f6",
       host: "ec2-35-175-170-131.compute-1.amazonaws.com",
-      port: 5432
+      port: 5432,
+      SSL: true
     }
   },
   test: {
@@ -30,7 +32,8 @@ const customConfig = {
       password:
         "c36bf15735ecb0e9aef50dea46cd4696593867b24705da5ddb9df96c137029f6",
       host: "ec2-35-175-170-131.compute-1.amazonaws.com",
-      port: 5432
+      port: 5432,
+      SSL: true
     }
   },
   production: {

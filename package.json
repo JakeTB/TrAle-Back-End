@@ -4,14 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node listen.js"
+    "test": "mocha spec/app.spec.js",
+    "start": "node listen.js",
+    "setup-dbs": "psql -f ./db/setup.sql > output.txt",
+    "seed": "knex seed:run",
+    "migrate-latest": "knex migrate:latest",
+    "migrate-rollback": "knex migrate:rollback"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "chai": "^4.2.0",
+    "chai-sorted": "^0.2.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "knex": "^0.20.8",

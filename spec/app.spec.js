@@ -63,9 +63,17 @@ describe("API-Testing", () => {
         });
       });
     });
-    describe("PATCH - Single User", () => {
-      describe("Status:200", () => {
-        it("Responds with a status of 200", () => {
+    describe.only("PATCH - Single User", () => {
+      describe.only("Status: 200", () => {
+        it("If sent a patch request with an empty body responds with status of 200", () => {
+          return request(app)
+            .patch("/api/users/1")
+            .send({})
+            .expect(200);
+        });
+      });
+      describe("Status:201", () => {
+        it("Responds with a status of 201", () => {
           return request(app)
             .patch("/api/users/1")
             .send({ username: "Adam" })
@@ -79,6 +87,35 @@ describe("API-Testing", () => {
             .then(({ body: { updatedUser } }) => {
               expect(updatedUser.username).to.equal("John");
             });
+        });
+        it("Updates the avatar picture of the correct user", () => {
+          return request(app)
+            .patch("/api/users/1")
+            .send({ avatar: "Test change 12" })
+            .expect(201)
+            .then(({ body: { updatedUser } }) => {
+              expect(updatedUser.avatar).to.equal("Test change 12");
+            });
+        });
+        it("Updates both the avatar and the picture of the correct user", () => {
+          return request(app)
+            .patch("/api/users/2")
+            .send({ username: "Alex", avatar: "123" })
+            .expect(201)
+            .then(({ body: { updatedUser } }) => {
+              expect(updatedUser.avatar).to.equal("123");
+              expect(updatedUser.username).to.equal("Alex");
+            });
+        });
+      });
+      describe("Errors", () => {
+        describe("Status 404", () => {
+          it("If sent an incorrect url responds with a 404", () => {
+            return request(app)
+              .patch("/api/usrs/1")
+              .send({ username: "Jon" })
+              .expect(404);
+          });
         });
       });
     });

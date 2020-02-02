@@ -20,6 +20,10 @@ exports.updateSingleUser = (req, res, next) => {
   patchSingleUser(req.params, req.body)
     .then(response => {
       const updatedUser = response[0];
+      if (response.status) {
+        res.status(response.status).send(updatedUser);
+      }
+      console.log("response", response);
       res.status(201).send({ updatedUser });
     })
     .catch(error => {

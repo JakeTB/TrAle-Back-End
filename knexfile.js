@@ -1,7 +1,7 @@
 const { DB_URL } = process.env;
 const pg = require("pg");
 pg.defaults.ssl = true;
-const ENV = process.env.NODE_ENV || "development";
+const ENV = process.env.NODE_ENV || "test";
 
 const baseConfig = {
   client: "pg",

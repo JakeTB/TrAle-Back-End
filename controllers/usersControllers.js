@@ -1,12 +1,9 @@
 const { getAllUsers } = require("../models/usersModels");
 exports.sendAllUsers = (req, res, next) => {
-  console.log("Inside of model");
   getAllUsers()
     .then(response => {
-      console.log("Response", response);
+      console.log(response, "response in model");
       res.status(200).send({ response });
     })
-    .catch(error => {
-      console.log(error, "<<<<ERROR");
-    });
+    .catch(error => {});
 };

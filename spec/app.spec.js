@@ -26,9 +26,9 @@ describe("API-Testing", () => {
             .get("/api/users")
             .expect(200)
             .then(({ body: { users } }) => {
-              expect(users[0].user_id).to.equal(1);
-              expect(users[1].user_id).to.equal(2);
-              expect(users[2].user_id).to.equal(3);
+              expect(users[0].id).to.equal(1);
+              expect(users[1].id).to.equal(2);
+              expect(users[2].id).to.equal(3);
             });
         });
         it("Testing that the returned users have the correct names", () => {
@@ -58,13 +58,13 @@ describe("API-Testing", () => {
             .expect(200)
             .then(({ body: { user } }) => {
               expect(user.username).to.equal("Adam");
-              expect(user.user_id).to.equal(1);
+              expect(user.id).to.equal(1);
             });
         });
       });
     });
-    describe.only("PATCH - Single User", () => {
-      describe.only("Status: 200", () => {
+    describe("PATCH - Single User", () => {
+      describe("Status: 200", () => {
         it("If sent a patch request with an empty body responds with status of 200", () => {
           return request(app)
             .patch("/api/users/1")

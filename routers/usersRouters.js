@@ -7,7 +7,7 @@ const userRouter = require("express").Router();
 
 userRouter.route("/").get(sendAllUsers);
 userRouter
-  .route("/:user_id")
+  .route("/:id")
   .get(sendSingleUser)
   .patch(updateSingleUser);
 module.exports = { userRouter };

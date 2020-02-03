@@ -3,21 +3,21 @@ exports.getAllUsers = () => {
   return connection.select("*").from("users");
 };
 exports.getSingleUser = params => {
-  const { user_id } = params;
+  const { id } = params;
   return connection
     .select("*")
     .from("users")
-    .where({ user_id });
+    .where({ id });
 };
 exports.patchSingleUser = (params, body) => {
   const { username, avatar } = body;
-  const { user_id } = params;
+  const { id } = params;
   console.log(body);
 
   if (!Object.entries(body).length) {
     return connection
       .from("users")
-      .where({ user_id })
+      .where({ id })
       .returning("*")
       .then(response => {
         response.status = 200;
@@ -27,21 +27,21 @@ exports.patchSingleUser = (params, body) => {
   if (username && avatar) {
     return connection
       .from("users")
-      .where({ user_id })
+      .where({ id })
       .update({ username, avatar })
       .returning("*");
   }
   if (username) {
     return connection
       .from("users")
-      .where({ user_id })
+      .where({ id })
       .update({ username })
       .returning("*");
   }
   if (avatar) {
     return connection
       .from("users")
-      .where({ user_id })
+      .where({ id })
       .update({ avatar })
       .returning("*");
   }
